@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb-tests
+spec:
+  serviceName: mongodb-tests
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dbapp
+  template:
+    metadata:
+      labels:
+        app: dbapp
+    spec:
+      containers:
+      - name: mongodb-tests
+        image: mongo:4.0.8
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME_FILE
+            value: /etc/mongodb-secret/MONGO_ROOT_USERNAME
+          - name: MONGO_INITDB_ROOT_PASSWORD_FILE
+            value: /etc/mongodb-secret/MONGO_ROOT_PASSWORD
+        volumeMounts:
+        - name: mongodb-secret
+          mountPath: /etc/mongodb-secret
+          readOnly: true
+        - name: mongodb-data
+          mountPath: /data/db
+      nodeSelector:
+        size: large
+      volumes:
+      - name: mongodb-secret
+        secret:
+          secretName: mongodb-secret
+      - name: mongodb-data
+        persistentVolumeClaim:
+          claimName: mongodb-pvc
