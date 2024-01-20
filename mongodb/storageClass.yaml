@@ -3,5 +3,6 @@ kind: StorageClass
 metadata:
   name: mongodb-storageclass
 provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
 allowVolumeExpansion: true
