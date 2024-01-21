@@ -16,7 +16,7 @@ spec:
         - name: hotel-api-container
           image: docker.io/ndeta100/hotel-api:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
           env:
             - name: DB_URL
               valueFrom:
