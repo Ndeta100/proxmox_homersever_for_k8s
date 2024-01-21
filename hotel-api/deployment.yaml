@@ -18,18 +18,28 @@ spec:
           ports:
             - containerPort: 3000
           env:
-            - name: DB_URL
+            - name: MONGO_DB_URL
               valueFrom:
                 secretKeyRef:
                   name: hotel-api-secrets
-                  key: DB_URL
-            - name: DB_USERNAME
+                  key: MONGO_DB_URL
+            - name: MONGO_DB_NAME
               valueFrom:
                 secretKeyRef:
                   name: hotel-api-secrets
-                  key: DB_USERNAME
-            - name: DB_PASSWORD
+                  key: MONGO_DB_NAME
+            - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: hotel-api-secrets
-                  key: DB_PASSWORD
+                  key: JWT_SECRET
+            - name: HTTP_LISTEN_ADDRESS
+              valueFrom:
+                 secretKeyRef:
+                  name: hotel-api-secrets
+                  key: HTTP_LISTEN_ADDRESS
+            - name: MONGO_DB_URL_TEST
+              valueFrom:
+                secretKeyRef:
+                  name: hotel-api-secrets
+                  key: MONGO_DB_URL_TEST
