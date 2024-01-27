@@ -11,10 +11,5 @@ spec:
   hostPath:
     path: /mnt/kubernetes-storage/mongodb
   nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      - nodeSelectorTerms:
-        - matchExpressions:
-          - key: "kubernetes.io/os"
-            operator: In
-            values:
-            - linux
+    nodeSelector:
+      kubernetes.io/os: linux
