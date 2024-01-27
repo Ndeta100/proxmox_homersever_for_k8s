@@ -7,9 +7,14 @@ spec:
   capacity:
     storage: 5Gi
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   hostPath:
     path: /mnt/kubernetes-storage/mongodb
   nodeAffinity:
-    nodeSelector:
-      kubernetes.io/os: linux
+    nodeSelectorTerms:
+      - matchExpressions:
+        - key: "kubernetes.io/os"
+          operator: In
+          values:
+            - linux
+
